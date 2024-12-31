@@ -1,4 +1,65 @@
+local queueonteleport = queue_on_teleport or queueonteleport
+local setclipboard = toclipboard or setrbxclipboard or setclipboard
+local clonefunction = clonefunc or clonefunction
+local hookfunction =
+    hookfunc or replacecclosure or detourfunction or replacefunc or replacefunction or replaceclosure or detour_function or
+        hookfunction
+local setthreadidentity = set_thread_identity or setthreadcaps or setthreadidentity
+local firetouchinterests = fire_touch_interests or firetouchinterests
+local getnamecallmethod = get_namecall_method or getnamecallmethod
+local setnamecallmethod = set_namecall_method or setnamecallmethod
+local restorefunction = restorefunction or restoreclosure or restorefunc
+
+-- // cloneref function for exploits that dont support it
+local a = Instance.new("Part")
+for b, c in pairs(getreg()) do
+    if type(c) == "table" and #c then
+        if rawget(c, "__mode") == "kvs" then
+            for d, e in pairs(c) do
+                if e == a then
+                    getgenv().InstanceList = c;
+                    break
+                end
+            end
+        end
+    end
+end
+local f = {}
+function f.invalidate(g)
+    if not InstanceList then
+        return
+    end
+    for b, c in pairs(InstanceList) do
+        if c == g then
+            InstanceList[b] = nil;
+            return g
+        end
+    end
+end
+if not cloneref then
+    getgenv().cloneref = f.invalidate
+end
+
+getrenv().Visit = cloneref(game:GetService("Visit"))
+getrenv().MarketplaceService = cloneref(game:GetService("MarketplaceService")) -- // theres a reason why thats referenced in the roblox environment
+getrenv().HttpRbxApiService = cloneref(game:GetService("HttpRbxApiService"))
+getrenv().HttpService = cloneref(game:GetService("HttpService"))
+local CoreGui = cloneref(game:GetService("CoreGui"))
+local ContentProvider = cloneref(game:GetService("ContentProvider"))
+local RunService = cloneref(game:GetService("RunService"))
+local Stats = cloneref(game:GetService("Stats"))
+local Players = cloneref(game:GetService("Players"))
+local NetworkClient = cloneref(game:GetService("NetworkClient"))
+local VirtualUser = cloneref(game:GetService("VirtualUser"))
+local ProximityPromptService = cloneref(game:GetService("ProximityPromptService"))
+local Lighting = cloneref(game:GetService("Lighting"))
+local AssetService = cloneref(game:GetService("AssetService"))
+local TeleportService = cloneref(game:GetService("TeleportService"))
+local NetworkSettings = settings().Network
+local UserGameSettings = UserSettings():GetService("UserGameSettings")
+getrenv().getgenv = clonefunction(getgenv)
 local HttpService = game:GetService("HttpService")
+-- start(50%)
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/wizard"))()
 
 local Window = Library:NewWindow("arbix")
