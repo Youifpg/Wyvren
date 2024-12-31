@@ -32,7 +32,7 @@ local PurchaseSection = Window:NewSection("Dev proudcut")
 
     end)
     local index
-    purchase:Dropdown("Below is a list of all DevProducts in this game!", dnames, function(x)
+    Section:CreateDropdown("Below is a list of all DevProducts in this game!", dnames, function(x)
         index = nil
         for i, name in ipairs(dnames) do
             if name == x then
